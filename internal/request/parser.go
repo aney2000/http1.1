@@ -41,7 +41,7 @@ func NewParser(limits Limits) *Parser {
 // ends cleanly before any byte of a new request, which signals a closed
 // keep-alive connection rather than an error.
 func (p *Parser) Parse(r *bufio.Reader) (*Request, error) {
-	line, err := p.readLine(r)
+	line, err := readLine(r, p.limits.MaxLineBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,9 @@ func (p *Parser) Parse(r *bufio.Reader) (*Request, error) {
 		return nil, err
 	}
 
-	req.Body = strings.NewReader("")
+	if err := p.attachBody(req, r); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -89,7 +91,7 @@ func parseRequestLine(line string) (*Request, error) {
 func (p *Parser) readHeaders(r *bufio.Reader) (*headers.Headers, error) {
 	h := headers.New()
 	for {
-		line, err := p.readLine(r)
+		line, err := readLine(r, p.limits.MaxLineBytes)
 		if err != nil {
 			return nil, unexpectedEOF(err)
 		}
@@ -122,11 +124,11 @@ func validateHost(req *Request) error {
 
 // readLine reads one line terminated by CRLF (or bare LF, accepted for
 // robustness per RFC 9112 §2.2) and enforces the line length limit.
-func (p *Parser) readLine(r *bufio.Reader) (string, error) {
+func readLine(r *bufio.Reader, maxBytes int) (string, error) {
 	var sb strings.Builder
 	for {
 		chunk, err := r.ReadSlice('\n')
-		if sb.Len()+len(chunk) > p.limits.MaxLineBytes {
+		if sb.Len()+len(chunk) > maxBytes {
 			return "", ErrLineTooLong
 		}
 		sb.Write(chunk)

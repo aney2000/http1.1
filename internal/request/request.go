@@ -18,6 +18,9 @@ type Request struct {
 	Headers  *headers.Headers
 	Body     io.Reader
 
+	// ContentLength is the declared body size, or -1 when unknown (chunked).
+	ContentLength int64
+
 	// Params holds path parameters filled in by the router (e.g. {id}).
 	Params map[string]string
 }
