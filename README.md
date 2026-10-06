@@ -187,31 +187,6 @@ first and failed. It exposed a real bug: with `GET /users/me` and
 `POST /users/{id}` registered, `POST /users/me` returned 405 instead of
 reaching the parameter route. The test came first, so the fix came with proof.
 
-### Commit history
-
-The history is small and traceable, following
-[Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-chore: scaffold Go module, gitignore and golangci-lint config
-feat(headers): add case-insensitive header collection with RFC 9112 line parsing
-feat(status): add status codes with reason phrases and body rules
-feat(request): parse request line and headers with size limits
-feat(request): add Content-Length and chunked body framing with smuggling protection
-feat(response): add buffered response writer with Text/JSON/Error helpers
-feat(handler): add Handler interface, Func adapter and middleware chaining
-feat(router): add method/path router with params, 405 Allow and HEAD fallback
-feat(middleware): add panic recovery and structured access logging
-feat(status): add 431 Request Header Fields Too Large
-feat(server): add TCP server with keep-alive, pipelining, 100-continue, timeouts and graceful shutdown
-feat(notes): add Store interface and concurrency-safe in-memory implementation
-feat(app): wire demo routes (health, hello, echo, notes REST) behind middleware
-feat(config): load server settings from environment variables
-feat(cmd): add server entrypoint with env config and signal-driven graceful shutdown
-build(docker): add multi-stage Dockerfile with race-tested stage and distroless non-root runtime
-docs: add README
-```
-
 ### Test numbers
 
 About 1,900 lines of production code and 1,800 lines of tests. Total
