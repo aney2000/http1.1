@@ -4,17 +4,18 @@ import "testing"
 
 func TestCode_Text(t *testing.T) {
 	tests := map[Code]string{
-		OK:                  "OK",
-		Created:             "Created",
-		NoContent:           "No Content",
-		BadRequest:          "Bad Request",
-		NotFound:            "Not Found",
-		MethodNotAllowed:    "Method Not Allowed",
-		RequestTimeout:      "Request Timeout",
-		PayloadTooLarge:     "Content Too Large",
-		InternalServerError: "Internal Server Error",
-		NotImplemented:      "Not Implemented",
-		VersionNotSupported: "HTTP Version Not Supported",
+		OK:                   "OK",
+		Created:              "Created",
+		NoContent:            "No Content",
+		BadRequest:           "Bad Request",
+		NotFound:             "Not Found",
+		MethodNotAllowed:     "Method Not Allowed",
+		RequestTimeout:       "Request Timeout",
+		PayloadTooLarge:      "Content Too Large",
+		HeaderFieldsTooLarge: "Request Header Fields Too Large",
+		InternalServerError:  "Internal Server Error",
+		NotImplemented:       "Not Implemented",
+		VersionNotSupported:  "HTTP Version Not Supported",
 	}
 	for code, want := range tests {
 		if got := code.Text(); got != want {

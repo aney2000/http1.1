@@ -8,35 +8,37 @@ type Code int
 
 // Status codes supported by the server.
 const (
-	Continue            Code = 100
-	OK                  Code = 200
-	Created             Code = 201
-	NoContent           Code = 204
-	NotModified         Code = 304
-	BadRequest          Code = 400
-	NotFound            Code = 404
-	MethodNotAllowed    Code = 405
-	RequestTimeout      Code = 408
-	PayloadTooLarge     Code = 413
-	InternalServerError Code = 500
-	NotImplemented      Code = 501
-	VersionNotSupported Code = 505
+	Continue             Code = 100
+	OK                   Code = 200
+	Created              Code = 201
+	NoContent            Code = 204
+	NotModified          Code = 304
+	BadRequest           Code = 400
+	NotFound             Code = 404
+	MethodNotAllowed     Code = 405
+	RequestTimeout       Code = 408
+	PayloadTooLarge      Code = 413
+	HeaderFieldsTooLarge Code = 431
+	InternalServerError  Code = 500
+	NotImplemented       Code = 501
+	VersionNotSupported  Code = 505
 )
 
 var reasonPhrases = map[Code]string{
-	Continue:            "Continue",
-	OK:                  "OK",
-	Created:             "Created",
-	NoContent:           "No Content",
-	NotModified:         "Not Modified",
-	BadRequest:          "Bad Request",
-	NotFound:            "Not Found",
-	MethodNotAllowed:    "Method Not Allowed",
-	RequestTimeout:      "Request Timeout",
-	PayloadTooLarge:     "Content Too Large",
-	InternalServerError: "Internal Server Error",
-	NotImplemented:      "Not Implemented",
-	VersionNotSupported: "HTTP Version Not Supported",
+	Continue:             "Continue",
+	OK:                   "OK",
+	Created:              "Created",
+	NoContent:            "No Content",
+	NotModified:          "Not Modified",
+	BadRequest:           "Bad Request",
+	NotFound:             "Not Found",
+	MethodNotAllowed:     "Method Not Allowed",
+	RequestTimeout:       "Request Timeout",
+	PayloadTooLarge:      "Content Too Large",
+	HeaderFieldsTooLarge: "Request Header Fields Too Large",
+	InternalServerError:  "Internal Server Error",
+	NotImplemented:       "Not Implemented",
+	VersionNotSupported:  "HTTP Version Not Supported",
 }
 
 // Text returns the reason phrase, or "" for unknown codes.
