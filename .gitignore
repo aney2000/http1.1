@@ -1,0 +1,12 @@
+# Binaries
+/bin/
+*.exe
+*.test
+
+# Coverage
+coverage.out
+coverage.html
+
+# IDE
+.idea/
+.vscode/

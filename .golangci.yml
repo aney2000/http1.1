@@ -1,0 +1,31 @@
+version: "2"
+
+run:
+  timeout: 3m
+
+linters:
+  default: standard
+  enable:
+    - bodyclose
+    - errorlint
+    - gocritic
+    - gocyclo
+    - misspell
+    - revive
+    - unconvert
+    - unparam
+  settings:
+    gocyclo:
+      min-complexity: 12
+    revive:
+      rules:
+        - name: exported
+        - name: var-naming
+        - name: indent-error-flow
+        - name: error-strings
+        - name: receiver-naming
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
